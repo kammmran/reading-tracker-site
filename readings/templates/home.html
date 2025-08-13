@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Literature Timeline - Reading Tracker{% endblock %}
+
+{% block content %}
+        <div class="timeline-container">
+            <!-- Compact Filter Controls -->
+            <div class="compact-filter">
+                <input type="text" id="searchInput" placeholder="Search authors..." />
+                <select id="categoryFilter">
+                    <option value="all">All</option>
+                    <option value="tragedy">Tragedy</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="history">History</option>
+                    <option value="philosophy">Philosophy</option>
+                    <option value="poetry">Poetry</option>
+                    <option value="drama">Drama</option>
+                    <option value="novel">Novel</option>
+                </select>
+                <select id="timeFilter">
+                    <option value="all">All Periods</option>
+                    <option value="ancient">Ancient</option>
+                    <option value="medieval">Medieval</option>
+                    <option value="renaissance">Renaissance</option>
+                    <option value="modern">Modern</option>
+                </select>
+                <select id="countryFilter">
+                    <option value="all">All Countries</option>
+                </select>
+                <button id="resetFilters" class="reset-btn">Reset</button>
+                <button id="dictionaryBtn" class="dictionary-btn">📖 Dictionary</button>
+                <button id="notesBtn" class="notes-btn">📝 Notes</button>
+                <button id="readingListBtn" class="reading-list-btn">Reading List</button>
+                <button id="profileBtn" class="profile-btn">👤 Profile</button>
+            </div>
+            
+            <div id="timeline"></div>
+        </div>
+        
+        <!-- Dictionary Panel -->
+        <div class="dictionary-panel" id="dictionaryPanel">
+            <div class="dictionary-header">
+                <h3>📖 Dictionary</h3>
+                <button id="closeDictionary" class="close-dictionary">×</button>
+            </div>
+            
+            <div class="dictionary-content">
+                <div class="dictionary-search-section">
+                    <div class="dictionary-search">
+                        <input type="text" id="dictionarySearch" placeholder="Search for terms, characters, places...">
+                        <button id="dictionarySearchBtn">Search</button>
+                    </div>
+                    
+                    <!-- Dictionary Filter Tabs -->
+                    <div class="dictionary-filters">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">All</button>
+                            <button class="filter-tab" data-filter="words">Words</button>
+                            <button class="filter-tab" data-filter="gods">Gods</button>
+                            <button class="filter-tab" data-filter="books">Books</button>
+                            <button class="filter-tab" data-filter="cities">Cities</button>
+                            <button class="filter-tab" data-filter="characters">Characters</button>
+                            <button class="filter-tab" data-filter="authors">Authors</button>
+                            <button class="filter-tab" data-filter="concepts">Concepts</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dictionary-results-section">
+                    <div class="results-header" id="resultsHeader" style="display: none;">
+                        <div class="results-count"></div>
+                        <div class="results-sort">
+                            <select id="resultsSortBy">
+                                <option value="relevance">Relevance</option>
+                                <option value="type">Type</option>
+                                <option value="alphabetical">A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="dictionary-results" id="dictionaryResults">
+                        <div class="dictionary-welcome">
+                            <div class="welcome-header">
+                                <h4>Search the Literary Dictionary</h4>
+                                <p>Find Greek words, gods, ancient sites, characters, authors, books, and concepts</p>
+                            </div>
+                            <div class="welcome-categories">
+                                <div class="category-grid">
+                                    <div class="category-item" data-category="words">
+                                        <div class="category-icon">📝</div>
+                                        <div class="category-title">Greek Words</div>
+                                        <div class="category-desc">Ancient Greek terms</div>
+                                    </div>
+                                    <div class="category-item" data-category="gods">
+                                        <div class="category-icon">⚡</div>
+                                        <div class="category-title">Greek Gods</div>
+                                        <div class="category-desc">Olympian and other deities</div>
+                                    </div>
+                                    <div class="category-item" data-category="sites">
+                                        <div class="category-icon">🏛️</div>
+                                        <div class="category-title">Ancient Sites</div>
+                                        <div class="category-desc">Archaeological locations</div>
+                                    </div>
+                                    <div class="category-item" data-category="books">
+                                        <div class="category-icon">📚</div>
+                                        <div class="category-title">Books</div>
+                                        <div class="category-desc">Literary works</div>
+                                    </div>
+                                    <div class="category-item" data-category="cities">
+                                        <div class="category-icon">🏛️</div>
+                                        <div class="category-title">Cities</div>
+                                        <div class="category-desc">Ancient places</div>
+                                    </div>
+                                    <div class="category-item" data-category="characters">
+                                        <div class="category-icon">🎭</div>
+                                        <div class="category-title">Characters</div>
+                                        <div class="category-desc">Heroes and figures</div>
+                                    </div>
+                                    <div class="category-item" data-category="authors">
+                                        <div class="category-icon">✍️</div>
+                                        <div class="category-title">Authors</div>
+                                        <div class="category-desc">Writers and poets</div>
+                                    </div>
+                                    <div class="category-item" data-category="concepts">
+                                        <div class="category-icon">💡</div>
+                                        <div class="category-title">Concepts</div>
+                                        <div class="category-desc">Themes and ideas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Panel -->
+        <div class="notes-panel" id="notesPanel">
+            <div class="notes-header">
+                <h3>📝 Notes</h3>
+                <button id="closeNotes" class="close-notes">×</button>
+            </div>
+            
+            <div class="notes-content">
+                <div class="notes-toolbar">
+                    <button id="addNoteBtn" class="add-note-btn">+ Add Note</button>
+                    <div class="notes-search">
+                        <input type="text" id="notesSearch" placeholder="Search notes...">
+                    </div>
+                </div>
+                
+                <div class="notes-filter" id="notesFilter">
+                    <div class="filter-chips">
+                        <button class="filter-chip active" data-filter="all">📋 All</button>
+                        <button class="filter-chip" data-filter="recent">🕙 Recent</button>
+                        <button class="filter-chip" data-filter="books">📚 Books</button>
+                        <button class="filter-chip" data-filter="authors">✍️ Authors</button>
+                    </div>
+                </div>
+                
+                <div class="notes-list" id="notesList">
+                    <div class="empty-notes">
+                        <p>No notes yet. Click "Add Note" to create your first note.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reading List Panel -->
+        <div class="reading-list-panel" id="readingListPanel">
+            <div class="reading-list-header">
+                <h3>📚 Reading List</h3>
+                <button id="closeReadingList" class="close-reading-list">×</button>
+            </div>
+            
+            <div class="reading-list-content" id="readingListContent">
+                <div class="book-search-section">
+                    <input type="text" id="bookSearch" placeholder="Search all books...">
+                    <div class="book-search-results" id="bookSearchResults">
+                        <div class="search-welcome">
+                            <p>Search for books to add to your reading list</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reading-lists">
+                    <div class="reading-list-section">
+                        <h4>Want to Read</h4>
+                        <div class="reading-list-items" id="wantToReadList">
+                            <div class="empty-list">No books added yet</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reading-list-section">
+                        <h4>Currently Reading</h4>
+                        <div class="reading-list-items" id="currentlyReadingList">
+                            <div class="empty-list">No books added yet</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reading-list-section">
+                        <h4>Read</h4>
+                        <div class="reading-list-items" id="readList">
+                            <div class="empty-list">No books added yet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Panel -->
+        <div class="profile-panel" id="profilePanel">
+            <div class="profile-header">
+                <h3>👤 Profile</h3>
+                <button id="closeProfile" class="close-profile">×</button>
+            </div>
+            
+            <div class="profile-content" id="profileContent">
+                <div class="profile-welcome">
+                    <p>Please login to view your profile</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Author Details Popup -->
+        <div class="popup-overlay" id="popupOverlay">
+            <div class="popup-content" id="popupContent">
+                <div class="popup-header">
+                    <span class="popup-close" id="popupClose">&times;</span>
+                </div>
+                <div id="authorInfo"></div>
+            </div>
+        </div>
+        
+        <!-- Book Preview Tooltip -->
+        <div class="book-tooltip" id="bookTooltip">
+            <div class="tooltip-content"></div>
+        </div>
+    </div>
+
+{% endblock %}

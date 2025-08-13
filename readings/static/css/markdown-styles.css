@@ -1,0 +1,221 @@
+/* Markdown Styling for Notes */
+.markdown-indicator {
+    font-size: 11px;
+    color: #4299e1;
+    font-style: italic;
+    margin-left: 8px;
+    background-color: #ebf8ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.markdown-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+    padding: 6px;
+    background-color: #f7fafc;
+    border-radius: 5px;
+    border: 1px solid #e2e8f0;
+}
+
+.md-tool {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.md-tool:hover {
+    background-color: #ebf8ff;
+    border-color: #4299e1;
+    color: #4299e1;
+}
+
+.md-preview-toggle {
+    margin-left: auto;
+    background-color: #edf2f7;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.md-preview-toggle:hover {
+    background-color: #e2e8f0;
+}
+
+.md-preview-toggle.active {
+    background-color: #4299e1;
+    color: white;
+    border-color: #3182ce;
+}
+
+.markdown-preview {
+    display: none;
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    min-height: 120px;
+    margin-top: 10px;
+    overflow: auto;
+    line-height: 1.6;
+}
+
+.markdown-preview.active {
+    display: block;
+}
+
+.markdown-help {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.markdown-help summary {
+    cursor: pointer;
+    color: #4a5568;
+    display: inline-block;
+}
+
+.markdown-help summary:hover {
+    color: #4299e1;
+}
+
+.markdown-help-content {
+    margin-top: 8px;
+    padding: 10px;
+    background-color: #f7fafc;
+    border-radius: 5px;
+    border: 1px dashed #e2e8f0;
+}
+
+.markdown-help-content p {
+    margin: 4px 0;
+    font-size: 12px;
+}
+
+/* Styling for rendered markdown content in notes */
+.note-content.markdown h1,
+.note-content.markdown h2,
+.note-content.markdown h3,
+.note-content.markdown h4,
+.note-content.markdown h5,
+.note-content.markdown h6,
+.full-note-text.markdown h1,
+.full-note-text.markdown h2,
+.full-note-text.markdown h3,
+.full-note-text.markdown h4,
+.full-note-text.markdown h5,
+.full-note-text.markdown h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.note-content.markdown h1,
+.full-note-text.markdown h1 {
+    font-size: 1.5em;
+}
+
+.note-content.markdown h2,
+.full-note-text.markdown h2 {
+    font-size: 1.4em;
+}
+
+.note-content.markdown h3,
+.full-note-text.markdown h3 {
+    font-size: 1.3em;
+}
+
+.note-content.markdown p,
+.full-note-text.markdown p {
+    margin-bottom: 0.75em;
+}
+
+.note-content.markdown a,
+.full-note-text.markdown a {
+    color: #4299e1;
+    text-decoration: underline;
+}
+
+.note-content.markdown a:hover,
+.full-note-text.markdown a:hover {
+    color: #3182ce;
+}
+
+.note-content.markdown blockquote,
+.full-note-text.markdown blockquote {
+    border-left: 3px solid #e2e8f0;
+    padding-left: 10px;
+    margin-left: 0;
+    color: #718096;
+    font-style: italic;
+    margin: 0.5em 0;
+}
+
+.note-content.markdown ul,
+.note-content.markdown ol,
+.full-note-text.markdown ul,
+.full-note-text.markdown ol {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+}
+
+.note-content.markdown li,
+.full-note-text.markdown li {
+    margin-bottom: 0.25em;
+}
+
+.note-content.markdown code,
+.full-note-text.markdown code {
+    background-color: #f7fafc;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.note-content.markdown pre,
+.full-note-text.markdown pre {
+    background-color: #f7fafc;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 0.75em 0;
+}
+
+.note-content.markdown pre code,
+.full-note-text.markdown pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.note-content.markdown-rendered img,
+.full-note-text.markdown img {
+    max-width: 100%;
+    height: auto;
+}
+
+.note-content.markdown-rendered hr,
+.full-note-text.markdown hr {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 1em 0;
+}
+
+/* Fix for the truncation with markdown content */
+.note-content.markdown-rendered {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
